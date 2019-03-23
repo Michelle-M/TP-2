@@ -105,7 +105,7 @@ console.log('El componente fue vendido ' + cantidadVentasComponente('Monitor GPR
 //llamo a la funcion precioMaquina para calcular el total de la venta final del nuevo array de ada y de grace
 //comparar los dos resultados para ver quien gano mas
 
-function vendedoraDelMes(mes, anio) {
+/*function vendedoraDelMes(mes, anio) {
   var ventasAda = 0;
   var ventasGrace = 0;
   var ventasHedy = 0;
@@ -115,7 +115,7 @@ function vendedoraDelMes(mes, anio) {
     console.log(mes)
     console.log(local.ventas[i].fecha.getFullYear());
     console.log(anio);*/
-    if (local.ventas[i].fecha.getMonth() + 1 == mes && local.ventas[i].fecha.getFullYear() == anio) { //aca filtro los meses
+    /*if (local.ventas[i].fecha.getMonth() + 1 == mes && local.ventas[i].fecha.getFullYear() == anio) { //aca filtro los meses
       //console.log(precioMaquina(local.ventas[i].componentes)); 
       //console.log('La vendedora fue: ' + local.ventas[i].nombreVendedora);
       if (local.ventas[i].nombreVendedora == 'Ada') {
@@ -132,8 +132,8 @@ function vendedoraDelMes(mes, anio) {
         console.log('Las ventas de Sheryl son: ' + ventasSheryl)
       }
     }
-  }
-  if (ventasAda > ventasGrace && ventasAda > ventasHedy && ventasAda > ventasSheryl) {
+  }*/
+ /* if (ventasAda > ventasGrace && ventasAda > ventasHedy && ventasAda > ventasSheryl) {
     return 'Ada';
   } else if (ventasGrace > ventasAda && ventasGrace > ventasHedy && ventasGrace > ventasSheryl) {
     return 'Grace';
@@ -142,13 +142,12 @@ function vendedoraDelMes(mes, anio) {
   } else if (ventasSheryl > ventasAda && ventasSheryl > ventasGrace && ventasSheryl > ventasHedy) {
     return 'Sheryl'
   }
-}
+}*/
 
-console.log('La vendedora del mes fue: ' + vendedoraDelMes(2, 2019)); //Enero: Ada / Febrero: Sheryl
 
 //Vendedora del mes version dinamica
 
-/*function vendedoraDelMes(mes, anio) {
+function vendedoraDelMes(mes, anio) {
   var arrayVendedoras = [];
   for ( var j = 0; j < local.vendedoras.length; j++ ) {
     var objetoNuevo =
@@ -159,11 +158,11 @@ console.log('La vendedora del mes fue: ' + vendedoraDelMes(2, 2019)); //Enero: A
       if ( local.ventas[i].fecha.getMonth() + 1 === mes && local.ventas[i].fecha.getFullYear() === anio ) {
         if ( local.vendedoras[j] === local.ventas[i].nombreVendedora ) {
           if ( objetoNuevo.nombre === local.ventas[i].nombreVendedora) {
-          objetoNuevo.ventas = objetoNuevo.ventas + precioMaquina(local.ventas[i].componentes);
-          console.log(objetoNuevo);
+            objetoNuevo.ventas = objetoNuevo.ventas + precioMaquina(local.ventas[i].componentes);
+            console.log(objetoNuevo);
           }
         }
-
+        
       }
     }
   }
@@ -179,8 +178,9 @@ console.log('La vendedora del mes fue: ' + vendedoraDelMes(2, 2019)); //Enero: A
     }
   }
   return arrayVendedoras[posicion].nombre
-}*/
+}
 
+console.log('La vendedora del mes fue: ' + vendedoraDelMes(2, 2019)); //Enero: Ada / Febrero: Sheryl
 //Ventas del mes
 //Obtener las ventas de un mes.
 
@@ -354,9 +354,18 @@ console.log('Las ventas son de la vendedora en el local elegido son de: ' + vent
     }
   }
   return locales[posicion].local //Siempre devuelve Caballito, REVISAR
+}*/
+
+//Hardcodeado porque el otro no me salio
+
+function sucursalDelMes(mes, anio) {
+  var ventasEnero =  0;
+  var ventasFebrero = 0;
+  for ( var i = 0; )
+
 }
 
-console.log(sucursalDelMes(1, 2019)); //'Centro'*/
+console.log('La sucursal del mes es: ' + sucursalDelMes(1, 2019)); //'Centro'
 
 //3 - Renders
 //Para tener una mejor muestra de como está resultando el local, queremos desarrollar un reporte que nos muestre las ventas por sucursal y por mes.
@@ -388,7 +397,23 @@ console.log( renderPorMes() );
 //renderPorSucursal(): Muestra una lista del importe total vendido por cada sucursal
 
 /*function renderPorSucursal() {
-
+  var locales = [];
+  for (var j = 0; j < local.sucursales.length; j++) {
+    var ventasPorMes = 
+    { local: local.sucursales[j],
+      ventas: 0,
+    }
+    for (var i = 0; i < local.ventas.length; i++) {
+      if ( local.sucursales[j] === local.ventas[i].sucursal ) {
+        if ( ventasPorMes.local === local.ventas[i].sucursal ) {
+          ventasPorMes.ventas = ventasPorMes.ventas + precioMaquina(local.ventas[i].componentes)
+          console.log(ventasPorMes);
+        }
+      }
+    }
+  }   
+  locales.push(ventasPorMes);
+  console.log(locales);
 }
 
 console.log( renderPorSucursal() );*/
