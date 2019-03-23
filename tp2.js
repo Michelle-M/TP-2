@@ -310,14 +310,12 @@ console.log('Las ventas de la sucursal ingresada tienen un importe de: ' + venta
 
 function ventasVendedoraPorSucursal(nombreVendedora, nombreSucursal) {
   var ventasTotalesVendedora = 0;
-  //var ventasLocal = 0;
   for (var i = 0; i < local.ventas.length; i++) {
     if (local.ventas[i].nombreVendedora === nombreVendedora && local.ventas[i].sucursal === nombreSucursal) {
       ventasTotalesVendedora = ventasTotalesVendedora + precioMaquina(local.ventas[i].componentes);
-      //ventasLocal = ventasLocal + precioMaquina(local.ventas[i].componentes);
     }
   }
-  return ventasTotalesVendedora //ventasLocal;
+  return ventasTotalesVendedora
 }
 
 console.log('Las ventas son de la vendedora en el local elegido son de: ' + ventasVendedoraPorSucursal('Hedy', 'Caballito'));
@@ -326,7 +324,7 @@ console.log('Las ventas son de la vendedora en el local elegido son de: ' + vent
 //Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la sucursal que más vendió en plata en el mes. 
 //No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
 
-function sucursalDelMes(mes, anio) {
+/*function sucursalDelMes(mes, anio) {
   var locales = [];
   for (var j = 0; j < local.sucursales.length; j++) {
     var ventasPorMes = 
@@ -358,7 +356,7 @@ function sucursalDelMes(mes, anio) {
   return locales[posicion].local //Siempre devuelve Caballito, REVISAR
 }
 
-console.log(sucursalDelMes(1, 2019)); //'Centro'
+console.log(sucursalDelMes(1, 2019)); //'Centro'*/
 
 //3 - Renders
 //Para tener una mejor muestra de como está resultando el local, queremos desarrollar un reporte que nos muestre las ventas por sucursal y por mes.
@@ -366,11 +364,19 @@ console.log(sucursalDelMes(1, 2019)); //'Centro'
 
 //renderPorMes(): Muestra una lista ordenada del importe total vendido por cada mes/año
 
-function renderPorMes(mes, anio) {
+function renderPorMes() {
+  var contadorDeVentasEnero = 0;
+  var contadorDeVentasFebrero = 0;
   for ( var i = 0; i < local.ventas.length; i++ ) {
-    
+    if ( local.ventas[i].fecha.getMonth() === 0 && local.ventas[i].fecha.getFullYear() === 2019 ) {
+      //console.log(local.ventas[i].componentes)
+      contadorDeVentasEnero = contadorDeVentasEnero + precioMaquina(local.ventas[i].componentes)
+    } else if ( local.ventas[i].fecha.getMonth() === 1 && local.ventas[i].fecha.getFullYear() === 2019 ) {
+      contadorDeVentasFebrero = contadorDeVentasFebrero + precioMaquina(local.ventas[i].componentes)
+    }
   }
-
+  console.log('Las ventas totales de enero son de: ' + contadorDeVentasEnero)
+  console.log('Las ventas totales de febrero son de: ' + contadorDeVentasFebrero)
 }
 
 console.log( renderPorMes() );
@@ -381,11 +387,11 @@ console.log( renderPorMes() );
 
 //renderPorSucursal(): Muestra una lista del importe total vendido por cada sucursal
 
-function renderPorSucursal() {
+/*function renderPorSucursal() {
 
 }
 
-console.log( renderPorSucursal() );
+console.log( renderPorSucursal() );*/
 
 // Ventas por sucursal:
 //   Total de Centro: 4195
@@ -393,11 +399,11 @@ console.log( renderPorSucursal() );
 
 //render(): Tiene que mostrar la unión de los dos reportes anteriores, cual fue el producto más vendido y la vendedora que más ingresos generó
 
-function render() {
+/*function render() {
 
 }
 
-console.log( render() );
+console.log( render() );*/
 
 // Reporte
 // Ventas por mes:
