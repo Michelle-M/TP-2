@@ -387,11 +387,27 @@ console.log( renderPorMes() );
 
 //renderPorSucursal(): Muestra una lista del importe total vendido por cada sucursal
 
-/*function renderPorSucursal() {
-
+function renderPorSucursal() {
+  var locales = [];
+  for (var j = 0; j < local.sucursales.length; j++) {
+    var ventasPorMes = 
+    { local: local.sucursales[j],
+      ventas: 0,
+    }
+    for (var i = 0; i < local.ventas.length; i++) {
+      if ( local.sucursales[j] === local.ventas[i].sucursal ) {
+        if ( ventasPorMes.local === local.ventas[i].sucursal ) {
+          ventasPorMes.ventas = ventasPorMes.ventas + precioMaquina(local.ventas[i].componentes)
+          console.log(ventasPorMes);
+        }
+      }
+    }
+  }   
+  locales.push(ventasPorMes);
+  console.log(locales);
 }
 
-console.log( renderPorSucursal() );*/
+console.log( renderPorSucursal() );
 
 // Ventas por sucursal:
 //   Total de Centro: 4195
