@@ -105,17 +105,17 @@ console.log('El componente fue vendido ' + cantidadVentasComponente('Monitor GPR
 //llamo a la funcion precioMaquina para calcular el total de la venta final del nuevo array de ada y de grace
 //comparar los dos resultados para ver quien gano mas
 
-/*function vendedoraDelMes(mes, anio) {
+function vendedoraDelMes(mes, anio) {
   var ventasAda = 0;
   var ventasGrace = 0;
   var ventasHedy = 0;
   var ventasSheryl = 0;
   for (var i = 0; i < local.ventas.length; i++) {
-    /*console.log(local.ventas[i].fecha.getMonth() + 1); //para que de bien el mes
-    console.log(mes)
-    console.log(local.ventas[i].fecha.getFullYear());
-    console.log(anio);*/
-    /*if (local.ventas[i].fecha.getMonth() + 1 == mes && local.ventas[i].fecha.getFullYear() == anio) { //aca filtro los meses
+    //console.log(local.ventas[i].fecha.getMonth() + 1); //para que de bien el mes
+    //console.log(mes)
+    //console.log(local.ventas[i].fecha.getFullYear());
+    //console.log(anio);
+    if (local.ventas[i].fecha.getMonth() + 1 == mes && local.ventas[i].fecha.getFullYear() == anio) { //aca filtro los meses
       //console.log(precioMaquina(local.ventas[i].componentes)); 
       //console.log('La vendedora fue: ' + local.ventas[i].nombreVendedora);
       if (local.ventas[i].nombreVendedora == 'Ada') {
@@ -132,8 +132,8 @@ console.log('El componente fue vendido ' + cantidadVentasComponente('Monitor GPR
         console.log('Las ventas de Sheryl son: ' + ventasSheryl)
       }
     }
-  }*/
- /* if (ventasAda > ventasGrace && ventasAda > ventasHedy && ventasAda > ventasSheryl) {
+  }
+  if (ventasAda > ventasGrace && ventasAda > ventasHedy && ventasAda > ventasSheryl) {
     return 'Ada';
   } else if (ventasGrace > ventasAda && ventasGrace > ventasHedy && ventasGrace > ventasSheryl) {
     return 'Grace';
@@ -142,15 +142,14 @@ console.log('El componente fue vendido ' + cantidadVentasComponente('Monitor GPR
   } else if (ventasSheryl > ventasAda && ventasSheryl > ventasGrace && ventasSheryl > ventasHedy) {
     return 'Sheryl'
   }
-}*/
-
+}
 
 //Vendedora del mes version dinamica
 
-function vendedoraDelMes(mes, anio) {
+/*function vendedoraDelMes(mes, anio) {
   var arrayVendedoras = [];
   for ( var j = 0; j < local.vendedoras.length; j++ ) {
-    var objetoNuevo =
+    var objetoNuevo = //muestra a la vendedora y suma las ventas
     { nombre: local.vendedoras[j],
       ventas: 0,
     }
@@ -167,7 +166,7 @@ function vendedoraDelMes(mes, anio) {
     }
   }
   arrayVendedoras.push(objetoNuevo);
-  console.log(arrayVendedoras)
+  //console.log(arrayVendedoras) //muestra a la vendedora del mes como array con nombre y venta
   var valorMaximo = 0;
   var nombreVendedora = '';
   var posicion = 0;
@@ -177,10 +176,11 @@ function vendedoraDelMes(mes, anio) {
       posicion = k;
     }
   }
-  return arrayVendedoras[posicion].nombre
-}
+  return arrayVendedoras[posicion].nombre //devuelve el nombre de la vendedora del mes
+}*/
 
 console.log('La vendedora del mes fue: ' + vendedoraDelMes(2, 2019)); //Enero: Ada / Febrero: Sheryl
+
 //Ventas del mes
 //Obtener las ventas de un mes.
 
@@ -359,15 +359,26 @@ console.log('Las ventas son de la vendedora en el local elegido son de: ' + vent
 //Hardcodeado porque el otro no me salio
 
 function sucursalDelMes(mes, anio) {
-  var ventasEnero =  0;
-  var ventasFebrero = 0;
-  for ( var i = 0; i < local.ventas.length; i++ ) {
-
+  var ventasCentro = 0;
+  var ventasCaballito = 0;
+  for ( var j = 0; j < local.ventas.length; j++ ) {
+    if ( local.ventas[j].fecha.getMonth() + 1 === mes && local.ventas[j].fecha.getFullYear() === anio ) {
+      if ( local.ventas[j].sucursal === 'Centro' ) {
+        //console.log(local.ventas[j].componentes)
+        ventasCentro = ventasCentro + precioMaquina(local.ventas[j].componentes)
+      } else if ( local.ventas[j].sucursal === 'Caballito') {
+        ventasCaballito = ventasCaballito + precioMaquina(local.ventas[j].componentes)
+      }
+    }
   }
-
+  if ( ventasCentro > ventasCaballito ) {
+    return 'Centro'
+  } else if ( ventasCentro < ventasCaballito ) {
+    return 'Caballito'
+  }
 }
 
-console.log('La sucursal del mes es: ' + sucursalDelMes(1, 2019)); //'Centro'
+console.log('La sucursal del mes es: ' + sucursalDelMes(1, 2019)); //'Centro' en enero y en febrero / cambie los datos de la sucursal para ver si funcionaba con Caballito y funciono
 
 //3 - Renders
 //Para tener una mejor muestra de como está resultando el local, queremos desarrollar un reporte que nos muestre las ventas por sucursal y por mes.
@@ -375,7 +386,7 @@ console.log('La sucursal del mes es: ' + sucursalDelMes(1, 2019)); //'Centro'
 
 //renderPorMes(): Muestra una lista ordenada del importe total vendido por cada mes/año
 
-function renderPorMes() {
+/*function renderPorMes() {
   var contadorDeVentasEnero = 0;
   var contadorDeVentasFebrero = 0;
   for ( var i = 0; i < local.ventas.length; i++ ) {
@@ -390,7 +401,7 @@ function renderPorMes() {
   console.log('Las ventas totales de febrero son de: ' + contadorDeVentasFebrero)
 }
 
-console.log( renderPorMes() );
+console.log( renderPorMes() );*/
 
 // Ventas por mes:
 //   Total de enero 2019: 1250
