@@ -213,7 +213,36 @@ function ventasVendedora(nombre) {
   return ventasTotalesVendedora;
 }
 
-console.log('Las ventas totales de la vendedora ingresada son de: ' + ventasVendedora('Grace'));
+console.log('Las ventas totales de la vendedora ingresada son de: ' + ventasVendedora('Grace')); //Ada 1680, Grace 1830, Hedy 690, Sheryl 1260
+
+function vendedoraConMasIngresos() {
+  var ventasTotalesAda = 0;
+  var ventasTotalesGrace = 0;
+  var ventasTotalesHedy = 0;
+  var ventasTotalesSheryl = 0;
+  for ( var i = 0; i < local.ventas.length; i++ ) {
+    if ( local.ventas[i].nombreVendedora === 'Ada' ) {
+      ventasTotalesAda = ventasTotalesAda + precioMaquina(local.ventas[i].componentes)
+    } else if ( local.ventas[i].nombreVendedora === 'Grace' ) {
+      ventasTotalesGrace = ventasTotalesGrace + precioMaquina(local.ventas[i].componentes)
+    } else if ( local.ventas[i].nombreVendedora === 'Hedy' ) {
+      ventasTotalesHedy = ventasTotalesHedy + precioMaquina(local.ventas[i].componentes)
+    } else if ( local.ventas[i].nombreVendedora === 'Sheryl' ) {
+      ventasTotalesSheryl = ventasTotalesSheryl + precioMaquina(local.ventas[i].componentes)
+    }
+  } 
+  if ( ventasTotalesAda > ventasTotalesGrace && ventasTotalesAda > ventasTotalesHedy && ventasTotalesAda > ventasTotalesSheryl ) {
+    return 'Ada';
+  } else if ( ventasTotalesGrace > ventasTotalesAda && ventasTotalesGrace > ventasTotalesHedy && ventasTotalesGrace > ventasTotalesSheryl ) {
+    return 'Grace';
+  } else if ( ventasTotalesHedy > ventasTotalesAda && ventasTotalesHedy > ventasTotalesGrace && ventasTotalesHedy > ventasTotalesSheryl ) {
+    return 'Hedy';
+  } else if ( ventasTotalesSheryl > ventasTotalesAda && ventasTotalesSheryl > ventasTotalesGrace && ventasTotalesSheryl > ventasTotalesHedy ) {
+    return 'Sheryl'
+  }
+}
+
+console.log('La vendedora con mas ingresos es: ' + vendedoraConMasIngresos());
 
 //Componentes mas vendido
 //Devuelve el nombre del componente que más ventas tuvo historicamente. 
@@ -397,11 +426,10 @@ function renderPorMes() {
       contadorDeVentasFebrero = contadorDeVentasFebrero + precioMaquina(local.ventas[i].componentes)
     }
   }
-  console.log('Las ventas totales de enero son de: ' + contadorDeVentasEnero)
-  console.log('Las ventas totales de febrero son de: ' + contadorDeVentasFebrero)
+  return ('Las ventas totales de enero son de: ' + contadorDeVentasEnero) + (' Las ventas totales de febrero son de: ' + contadorDeVentasFebrero)
 }
 
-console.log( renderPorMes() ); //Me da undefined porque no se como guardar los dos datos en el return
+console.log( renderPorMes() ); //No se si esta bien el return de esta forma
 
 // Ventas por mes:
 //   Total de enero 2019: 1250
@@ -420,11 +448,10 @@ function renderPorSucursal() {
       caballito = ventasSucursal('Caballito')
     }
   }
-  console.log('Las ventas de la sucursal Centro son de: ' + centro);
-  console.log('Las ventas de la sucursal Caballito son de: ' + caballito)
+  return ('Las ventas de la sucursal Centro son de: ' + centro) + (' Las ventas de la sucursal Caballito son de: ' + caballito)
 }
 
-console.log( renderPorSucursal() ); //Idem el render anterior, no se como poner los dos datos en el return
+console.log( renderPorSucursal() ); //Idem anterior con el return
 
 // Ventas por sucursal:
 //   Total de Centro: 4195
@@ -432,11 +459,21 @@ console.log( renderPorSucursal() ); //Idem el render anterior, no se como poner 
 
 //render(): Tiene que mostrar la unión de los dos reportes anteriores, cual fue el producto más vendido y la vendedora que más ingresos generó
 
-/*function render() {
-
+function render() {
+  var ventasPorMes;
+  var ventasPorSucursal;
+  var productoEstrella;
+  var vendedoraGanadora;
+  for ( var i = 0; i < local.ventas.length; i++ ) {
+    ventasPorMes = renderPorMes();
+    ventasPorSucursal = renderPorSucursal();
+    productoEstrella = componenteMasVendido();
+    vendedoraGanadora = vendedoraConMasIngresos();
+  }
+  return (ventasPorMes) + (' ' + ventasPorSucursal) + (' Producto estrella: ' + productoEstrella) + (' Vendedora que mas ingresos genero: ' + vendedoraGanadora)
 }
 
-console.log( render() );*/
+console.log( render() );
 
 // Reporte
 // Ventas por mes:
