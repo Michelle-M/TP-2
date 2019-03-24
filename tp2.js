@@ -386,7 +386,7 @@ console.log('La sucursal del mes es: ' + sucursalDelMes(1, 2019)); //'Centro' en
 
 //renderPorMes(): Muestra una lista ordenada del importe total vendido por cada mes/año
 
-/*function renderPorMes() {
+function renderPorMes() {
   var contadorDeVentasEnero = 0;
   var contadorDeVentasFebrero = 0;
   for ( var i = 0; i < local.ventas.length; i++ ) {
@@ -401,36 +401,30 @@ console.log('La sucursal del mes es: ' + sucursalDelMes(1, 2019)); //'Centro' en
   console.log('Las ventas totales de febrero son de: ' + contadorDeVentasFebrero)
 }
 
-console.log( renderPorMes() );*/
+console.log( renderPorMes() ); //Me da undefined porque no se como guardar los dos datos en el return
 
 // Ventas por mes:
 //   Total de enero 2019: 1250
 //   Total de febrero 2019: 4210
 
 //renderPorSucursal(): Muestra una lista del importe total vendido por cada sucursal
+//Uso la funcion ventasSucursal que ya obtenia estos datos
 
-
-/*function renderPorSucursal() {
-  var locales = [];
-  for (var j = 0; j < local.sucursales.length; j++) {
-    var ventasPorMes = 
-    { local: local.sucursales[j],
-      ventas: 0,
+function renderPorSucursal() {
+  var centro = 0;
+  var caballito = 0;
+  for ( var i = 0; i < local.ventas.length; i++ ) {
+    if ( local.ventas[i].sucursal === 'Centro' ) {
+      centro = ventasSucursal('Centro')
+    } else if ( local.ventas[i].sucursal === 'Caballito') {
+      caballito = ventasSucursal('Caballito')
     }
-    for (var i = 0; i < local.ventas.length; i++) {
-      if ( local.sucursales[j] === local.ventas[i].sucursal ) {
-        if ( ventasPorMes.local === local.ventas[i].sucursal ) {
-          ventasPorMes.ventas = ventasPorMes.ventas + precioMaquina(local.ventas[i].componentes)
-          console.log(ventasPorMes);
-        }
-      }
-    }
-  }   
-  locales.push(ventasPorMes);
-  console.log(locales);
+  }
+  console.log('Las ventas de la sucursal Centro son de: ' + centro);
+  console.log('Las ventas de la sucursal Caballito son de: ' + caballito)
 }
 
-console.log( renderPorSucursal() );*/
+console.log( renderPorSucursal() ); //Idem el render anterior, no se como poner los dos datos en el return
 
 // Ventas por sucursal:
 //   Total de Centro: 4195
