@@ -361,7 +361,9 @@ console.log('Las ventas son de la vendedora en el local elegido son de: ' + vent
 function sucursalDelMes(mes, anio) {
   var ventasEnero =  0;
   var ventasFebrero = 0;
-  for ( var i = 0; )
+  for ( var i = 0; i < local.ventas.length; i++ ) {
+
+  }
 
 }
 
@@ -395,6 +397,7 @@ console.log( renderPorMes() );
 //   Total de febrero 2019: 4210
 
 //renderPorSucursal(): Muestra una lista del importe total vendido por cada sucursal
+
 
 /*function renderPorSucursal() {
   var locales = [];
