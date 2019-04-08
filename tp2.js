@@ -1,3 +1,17 @@
+// Miche, te dejo mis observaciones a tu trabajo
+// En general esta muy bien, tu codigo es bueno. 
+// Como comentario para ir aplicando a partir de ahora y mejorar, te diria que comiences a acostumbrarte
+// a usar estructuras que te ahorren codigo
+// POr ejemplo, en lugar de escribir
+// total = total + 1
+// ir acostumbrandote a 
+// total++
+// Son detalles que suman mucho a la hora de leer tu codigo, especialmente si vas a un challenge 
+// para alguna empresa
+// Te deje a lo largo del trabajo algunos comentarios al respecto y tambien algunas maneras alternativas
+// de hacer las funciones
+// 
+
 //Local de ventas de PCs
 //Una empresa de venta de computadoras está desarrollando un sistema para llevar registro de ventas. Para ello cuenta con la siguiente información:
 
@@ -58,7 +72,14 @@ function precioMaquina(componentes) { //componentes es el parametro que pongo co
     console.log(componentes[i]);
     for (var j = 0; j < local.precios.length; j++) { //ya esta la i entonces cambio el nombre de la variable
       if (componentes[i] == local.precios[j].componente) {
+        // esto es un detalle, pero acostumbrate siempre a usar el triple signo "===" a menos
+        // que desees comparar strings y numeros. 
+        // Nos da un mejor control sobre nuestros datos. 
+        
         total = total + local.precios[j].precio //primero precio es 200 y desp 120, por eso las sumas
+        // o mas brevemente, podemos decir:
+        // total += local.precios[j].precio
+        
         console.log(local.precios[j].precio);
       } //con la i repito siempre el mismo, j tengo todos
     }
@@ -90,6 +111,7 @@ function cantidadVentasComponente(componente) {
     for (var j = 0; j < local.ventas[i].componentes.length; j++) {
       if (componente == local.ventas[i].componentes[j]) {
         totalComponente = totalComponente + 1;
+        // o mas brevemente, totalComponente++
       }
     }
   }
@@ -179,6 +201,32 @@ function vendedoraDelMes(mes, anio) {
   return arrayVendedoras[posicion].nombre //devuelve el nombre de la vendedora del mes
 }*/
 
+// una version aun mas breve seria esta:
+// function vendedoraDelMes(mes, anio) {
+//   var ventasVendedoras = {};
+
+//   for (var i = 0; i < local.ventas.length; i++) {
+//     if (local.ventas[i].fecha.getMonth() + 1 === mes && local.ventas[i].fecha.getFullYear() === anio) {
+//       var vendedora = local.ventas[i].nombreVendedora;
+//       if (!ventasVendedoras[vendedora]) {
+//         ventasVendedoras[vendedora] = 0;
+//       }
+
+//       ventasVendedoras[vendedora] += precioMaquina( local.ventas[i].componentes );
+//     }
+//   }
+
+//   var max = vendedoras[0];
+
+//   for (var i = 0; i < vendedoras.length; i++) {
+//     if (max && ventasVendedoras[vendedoras[i]] > ventasVendedoras[max]) {
+//       max = vendedoras[i];
+//     }
+//   }
+
+//   return max;
+// }
+
 console.log('La vendedora del mes fue: ' + vendedoraDelMes(2, 2019)); //Enero: Ada / Febrero: Sheryl
 
 //Ventas del mes
@@ -242,6 +290,12 @@ function vendedoraConMasIngresos() {
   }
 }
 
+
+// una version sin "harcodear" los nombres seria recorriendo el array local.vendedoras
+// y pasando cada nombre a la funcion ventasVendedora 
+
+
+
 console.log('La vendedora con mas ingresos es: ' + vendedoraConMasIngresos());
 
 //Componentes mas vendido
@@ -288,6 +342,20 @@ function huboVentas(mes, anio) {
   }
   return mesDeVenta
 }
+
+// podriamos abreviar esta funcion iniciando "mesDeVenta" en false
+// asi nos evitamos todo el codigo en el "else". Asi:
+
+// function huboVentas(mes, anio) {
+//   var mesDeVenta = false;
+//   for ( var i = 0; i < local.ventas.length; i++ ) {
+//     if ( local.ventas[i].fecha.getMonth() + 1 === mes && local.ventas[i].fecha.getFullYear() === anio ) {
+//       mesDeVenta = true;
+//     }
+//   }
+//   return mesDeVenta
+// }
+
 
 console.log( 'En el mes ingresado hubo ventas: ' +  huboVentas(3, 2019) ); // false
 
@@ -349,6 +417,20 @@ function ventasVendedoraPorSucursal(nombreVendedora, nombreSucursal) {
 
 console.log('Las ventas son de la vendedora en el local elegido son de: ' + ventasVendedoraPorSucursal('Hedy', 'Caballito'));
 
+// te dejo esta manera alternativa que sirve incluso si le pasamos un solo parametro, ya sea 
+// el nombre de una vendedora, o el de una sucursal
+// function ventasVendedoraPorSucursal(nombre) {
+//   var ventasTotales = 0;
+//   for (var i = 0; i < local.ventas.length; i++) {
+//     if (local.ventas[i].nombreVendedora === nombre || local.ventas[i].sucursal === nombre) {
+//       ventasTotales += precioMaquina(local.ventas[i].componentes);
+//     }
+//   }
+//   return ventasTotales
+// }
+
+
+
 //Sucursal del mes
 //Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la sucursal que más vendió en plata en el mes. 
 //No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
@@ -372,17 +454,21 @@ console.log('Las ventas son de la vendedora en el local elegido son de: ' + vent
     } 
   }
   locales.push(ventasPorMes);
+  // eso de arriba tendria que ir en la linea 437, adentro de los if y del for
+  
   console.log(locales)
   var valorMaximo = 0;
   var sucursalGanadora = '';
   var posicion = 0;
   for ( var k = 0; k < locales.length; k++ ) {
     if ( valorMaximo < locales[k].ventas ) {
+    // valorMaximo debe ser *mayor* a locales[k].ventas
       valorMaximo = locales[k].ventas;
       posicion = k;
     }
   }
   return locales[posicion].local //Siempre devuelve Caballito, REVISAR
+  // fijate con los dos cambios que te dije, deberia funcionar
 }*/
 
 //Hardcodeado porque el otro no me salio
